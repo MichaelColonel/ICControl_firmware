@@ -1,0 +1,626 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                              /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o (exit)
+/usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                              ./main.o (__tablejump2__)
+/usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                              ./main.o (__do_copy_data)
+/usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                              ./main.o (__do_clear_bss)
+/usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                              ./main.o (__usmulhisi3)
+/usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                              /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o) (__umulhisi3)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x0000000000000000 0x0000000000020000 xr
+data             0x0000000000800100 0x000000000000ff00 rw !x
+eeprom           0x0000000000810000 0x0000000000010000 rw !x
+fuse             0x0000000000820000 0x0000000000000400 rw !x
+lock             0x0000000000830000 0x0000000000000400 rw !x
+signature        0x0000000000840000 0x0000000000000400 rw !x
+user_signatures  0x0000000000850000 0x0000000000000400 rw !x
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+LOAD ./main.o
+START GROUP
+LOAD /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a
+LOAD /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/libm.a
+LOAD /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/libc.a
+LOAD /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/libatmega128.a
+END GROUP
+                0x0000000000020000                __TEXT_REGION_LENGTH__ = DEFINED (__TEXT_REGION_LENGTH__)?__TEXT_REGION_LENGTH__:0x20000
+                0x000000000000ff00                __DATA_REGION_LENGTH__ = DEFINED (__DATA_REGION_LENGTH__)?__DATA_REGION_LENGTH__:0xff00
+                0x0000000000010000                __EEPROM_REGION_LENGTH__ = DEFINED (__EEPROM_REGION_LENGTH__)?__EEPROM_REGION_LENGTH__:0x10000
+                0x0000000000000400                __FUSE_REGION_LENGTH__ = DEFINED (__FUSE_REGION_LENGTH__)?__FUSE_REGION_LENGTH__:0x400
+                0x0000000000000400                __LOCK_REGION_LENGTH__ = DEFINED (__LOCK_REGION_LENGTH__)?__LOCK_REGION_LENGTH__:0x400
+                0x0000000000000400                __SIGNATURE_REGION_LENGTH__ = DEFINED (__SIGNATURE_REGION_LENGTH__)?__SIGNATURE_REGION_LENGTH__:0x400
+                0x0000000000000400                __USER_SIGNATURE_REGION_LENGTH__ = DEFINED (__USER_SIGNATURE_REGION_LENGTH__)?__USER_SIGNATURE_REGION_LENGTH__:0x400
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x0000000000000000      0xa76
+ *(.vectors)
+ .vectors       0x0000000000000000       0x8c /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+                0x0000000000000000                __vectors
+                0x0000000000000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+                0x000000000000008c                . = ALIGN (0x2)
+                0x000000000000008c                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x000000000000008c        0x0 linker stubs
+ *(.trampolines*)
+                0x000000000000008c                __trampolines_end = .
+ *libprintf_flt.a:*(.progmem.data)
+ *libc.a:*(.progmem.data)
+ *(.progmem.*)
+ .progmem.data.strings
+                0x000000000000008c        0xc ./main.o
+                0x000000000000008c                strings
+ .progmem.data.Welcome_string
+                0x0000000000000098        0x8 ./main.o
+                0x0000000000000098                Welcome_string
+ .progmem.data.Abort_string
+                0x00000000000000a0        0x6 ./main.o
+                0x00000000000000a0                Abort_string
+ .progmem.data.Finish_string
+                0x00000000000000a6        0x7 ./main.o
+                0x00000000000000a6                Finish_string
+ .progmem.data.Start_string
+                0x00000000000000ad        0x6 ./main.o
+                0x00000000000000ad                Start_string
+ .progmem.data.NO_string
+                0x00000000000000b3        0x3 ./main.o
+                0x00000000000000b3                NO_string
+ .progmem.data.OK_string
+                0x00000000000000b6        0x3 ./main.o
+                0x00000000000000b6                OK_string
+                0x00000000000000ba                . = ALIGN (0x2)
+ *fill*         0x00000000000000b9        0x1 
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000000000000ba                __ctors_start = .
+ *(.ctors)
+                0x00000000000000ba                __ctors_end = .
+                0x00000000000000ba                __dtors_start = .
+ *(.dtors)
+                0x00000000000000ba                __dtors_end = .
+ SORT_BY_NAME(*)(.ctors)
+ SORT_BY_NAME(*)(.dtors)
+ *(.init0)
+ .init0         0x00000000000000ba        0x0 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+                0x00000000000000ba                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000000000000ba        0xc /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+ *(.init2)
+ *(.init3)
+ .init3         0x00000000000000c6       0xe4 ./main.o
+                0x00000000000000c6                init
+ *(.init3)
+ *(.init4)
+ .init4         0x00000000000001aa       0x1a /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                0x00000000000001aa                __do_copy_data
+ .init4         0x00000000000001c4       0x10 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                0x00000000000001c4                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000000000001d4        0x8 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+ *(.init9)
+ *(.text)
+ .text          0x00000000000001dc        0x4 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+                0x00000000000001dc                __vector_22
+                0x00000000000001dc                __vector_28
+                0x00000000000001dc                __vector_1
+                0x00000000000001dc                __vector_32
+                0x00000000000001dc                __vector_34
+                0x00000000000001dc                __vector_24
+                0x00000000000001dc                __vector_12
+                0x00000000000001dc                __bad_interrupt
+                0x00000000000001dc                __vector_6
+                0x00000000000001dc                __vector_31
+                0x00000000000001dc                __vector_3
+                0x00000000000001dc                __vector_23
+                0x00000000000001dc                __vector_30
+                0x00000000000001dc                __vector_25
+                0x00000000000001dc                __vector_11
+                0x00000000000001dc                __vector_13
+                0x00000000000001dc                __vector_17
+                0x00000000000001dc                __vector_19
+                0x00000000000001dc                __vector_7
+                0x00000000000001dc                __vector_27
+                0x00000000000001dc                __vector_5
+                0x00000000000001dc                __vector_33
+                0x00000000000001dc                __vector_9
+                0x00000000000001dc                __vector_21
+                0x00000000000001dc                __vector_15
+                0x00000000000001dc                __vector_29
+                0x00000000000001dc                __vector_8
+                0x00000000000001dc                __vector_14
+                0x00000000000001dc                __vector_10
+                0x00000000000001dc                __vector_16
+                0x00000000000001dc                __vector_18
+                0x00000000000001dc                __vector_20
+ .text          0x00000000000001e0        0x0 ./main.o
+ .text          0x00000000000001e0        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text          0x00000000000001e0        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text          0x00000000000001e0        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text          0x00000000000001e0        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text          0x00000000000001e0        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text          0x00000000000001e0        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x00000000000001e0                . = ALIGN (0x2)
+ *(.text.*)
+ .text.ft2232h_b_write_char
+                0x00000000000001e0       0x14 ./main.o
+ .text.ft2232h_b_write_rom_string_number
+                0x00000000000001f4       0x30 ./main.o
+ .text.update_code
+                0x0000000000000224       0x10 ./main.o
+ .text.__vector_26
+                0x0000000000000234       0x1e ./main.o
+                0x0000000000000234                __vector_26
+ .text.__vector_2
+                0x0000000000000252       0x28 ./main.o
+                0x0000000000000252                __vector_2
+ .text.__vector_4
+                0x000000000000027a       0xd2 ./main.o
+                0x000000000000027a                __vector_4
+ .text.startup.main
+                0x000000000000034c      0x68e ./main.o
+                0x000000000000034c                main
+ .text.libgcc.mul
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc.div
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc   0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc.prologue
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc.builtins
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc.fmul
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc.fixed
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc.mul
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text.libgcc.div
+                0x00000000000009da        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text.libgcc   0x00000000000009da       0x12 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                0x00000000000009da                __tablejump2__
+ .text.libgcc.prologue
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text.libgcc.builtins
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text.libgcc.fmul
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text.libgcc.fixed
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text.libgcc.mul
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x00000000000009ec        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x00000000000009ec        0xe /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                0x00000000000009ec                __usmulhisi3
+                0x00000000000009f0                __usmulhisi3_tail
+ .text.libgcc.div
+                0x00000000000009fa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text.libgcc   0x00000000000009fa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text.libgcc.prologue
+                0x00000000000009fa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text.libgcc.builtins
+                0x00000000000009fa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text.libgcc.fmul
+                0x00000000000009fa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text.libgcc.fixed
+                0x00000000000009fa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text.libgcc.mul
+                0x00000000000009fa       0x1e /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x00000000000009fa                __umulhisi3
+ .text.libgcc.div
+                0x0000000000000a18        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ .text.libgcc   0x0000000000000a18        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ .text.libgcc.prologue
+                0x0000000000000a18        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ .text.libgcc.builtins
+                0x0000000000000a18        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ .text.libgcc.fmul
+                0x0000000000000a18        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ .text.libgcc.fixed
+                0x0000000000000a18        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x0000000000000a18                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x0000000000000a18        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000a18                exit
+                0x0000000000000a18                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x0000000000000a18        0x4 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ *(.fini0)
+ *(.hightext)
+ *(.hightext*)
+ *(.progmemx.*)
+                0x0000000000000a1c                . = ALIGN (0x2)
+ *(.jumptables)
+ *(.jumptables*)
+ .jumptables.gcc.__vector_4
+                0x0000000000000a1c       0x26 ./main.o
+ .jumptables.gcc.main
+                0x0000000000000a42       0x34 ./main.o
+                0x0000000000000a76                _etext = .
+
+.data           0x0000000000800100        0xa load address 0x0000000000000a76
+                0x0000000000800100                PROVIDE (__data_start = .)
+ *(.data)
+ .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+ .data          0x0000000000800100        0x0 ./main.o
+ .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ *(.data*)
+ .data.samples  0x0000000000800100        0x4 ./main.o
+ .data.chip_capacity
+                0x0000000000800104        0x1 ./main.o
+ .data.integration_time
+                0x0000000000800105        0x1 ./main.o
+ .data.nofchips
+                0x0000000000800106        0x1 ./main.o
+ .data.chips_enabled
+                0x0000000000800107        0x2 ./main.o
+                0x0000000000800107                chips_enabled
+ .data.code     0x0000000000800109        0x1 ./main.o
+                0x0000000000800109                code
+ *(.gnu.linkonce.d*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.r*)
+                0x000000000080010a                . = ALIGN (0x2)
+                0x000000000080010a                _edata = .
+                0x000000000080010a                PROVIDE (__data_end = .)
+
+.bss            0x000000000080010a        0x9
+                0x000000000080010a                PROVIDE (__bss_start = .)
+ *(.bss)
+ .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+ .bss           0x000000000080010a        0x0 ./main.o
+ .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ *(.bss*)
+ .bss.bufferIsReset.0
+                0x000000000080010a        0x1 ./main.o
+ .bss.buffer.1  0x000000000080010b        0x3 ./main.o
+ .bss.pos.2     0x000000000080010e        0x1 ./main.o
+ .bss.adc_format
+                0x000000000080010f        0x1 ./main.o
+ .bss.single_shot_acquisition
+                0x0000000000800110        0x1 ./main.o
+ .bss.use_external_start
+                0x0000000000800111        0x1 ./main.o
+ .bss.data      0x0000000000800112        0x1 ./main.o
+                0x0000000000800112                data
+ *(COMMON)
+                0x0000000000800113                PROVIDE (__bss_end = .)
+                0x0000000000000a76                __data_load_start = LOADADDR (.data)
+                0x0000000000000a80                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x0000000000800113        0x0
+                [!provide]                        PROVIDE (__noinit_start = .)
+ *(.noinit .noinit.* .gnu.linkonce.n.*)
+                [!provide]                        PROVIDE (__noinit_end = .)
+                0x0000000000800113                _end = .
+                [!provide]                        PROVIDE (__heap_start = .)
+
+.eeprom         0x0000000000810000        0x0
+ *(.eeprom*)
+                0x0000000000810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x0000000000000000       0x12
+ *(.comment)
+ .comment       0x0000000000000000       0x12 ./main.o
+                                         0x13 (size before relaxing)
+
+.note.gnu.avr.deviceinfo
+                0x0000000000000000       0x3c
+ .note.gnu.avr.deviceinfo
+                0x0000000000000000       0x3c /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x0000000000000000       0xc0
+ *(.debug_aranges)
+ .debug_aranges
+                0x0000000000000000       0x20 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .debug_aranges
+                0x0000000000000020       0x20 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .debug_aranges
+                0x0000000000000040       0x20 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .debug_aranges
+                0x0000000000000060       0x20 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .debug_aranges
+                0x0000000000000080       0x20 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .debug_aranges
+                0x00000000000000a0       0x20 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x0000000000000000      0xaec
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0x780 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+ .debug_info    0x0000000000000780       0x92 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .debug_info    0x0000000000000812       0x92 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .debug_info    0x00000000000008a4       0x92 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .debug_info    0x0000000000000936       0x92 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .debug_info    0x00000000000009c8       0x92 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .debug_info    0x0000000000000a5a       0x92 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+
+.debug_abbrev   0x0000000000000000      0x790
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000      0x718 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+ .debug_abbrev  0x0000000000000718       0x14 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .debug_abbrev  0x000000000000072c       0x14 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .debug_abbrev  0x0000000000000740       0x14 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .debug_abbrev  0x0000000000000754       0x14 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .debug_abbrev  0x0000000000000768       0x14 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .debug_abbrev  0x000000000000077c       0x14 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+
+.debug_line     0x0000000000000000      0x2aa
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x0000000000000000       0x1d /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+ .debug_line    0x000000000000001d       0x66 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .debug_line    0x0000000000000083       0x6d /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .debug_line    0x00000000000000f0       0x71 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .debug_line    0x0000000000000161       0x6c /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .debug_line    0x00000000000001cd       0x6a /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .debug_line    0x0000000000000237       0x73 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str      0x0000000000000000      0x27d
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x27d /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_addr
+ *(.debug_addr)
+
+.debug_line_str
+ *(.debug_line_str)
+
+.debug_loclists
+ *(.debug_loclists)
+
+.debug_macro
+ *(.debug_macro)
+
+.debug_names
+ *(.debug_names)
+
+.debug_rnglists
+ *(.debug_rnglists)
+
+.debug_str_offsets
+ *(.debug_str_offsets)
+
+.debug_sup
+ *(.debug_sup)
+OUTPUT(Cabin26A_IC.elf elf32-avr)
+LOAD linker stubs
