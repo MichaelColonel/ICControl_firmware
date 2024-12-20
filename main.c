@@ -212,13 +212,17 @@ int main(int argc, char** argv)
 	  use_external_start = (bool)data;
 	  single_shot_acquisition = false;
 	  SETBIT( EIFR, INTF1); // Reset INT1
-	  SETVAL( EIMSK, INT1, use_external_start);
+	  SETVAL( EIMSK, INT1, use_external_start); // enable INT1 if use_external start is true
 	  ft2232h_b_write_char('A');
 	  ft2232h_b_write_char('0' + use_external_start);
 	  ft2232h_b_write_rom_string_number(0); // "OK"
 	  update_code(cmd);
 	  break;
     case 'B':
+      if (bit_is_set(EIMSK, INT1))
+      {
+        CLEARBIT( EIMSK, INT1); // Disable INT1
+      }
       ft2232h_b_write_rom_string_number(2); // "Start"
       _delay_ms(10);
       CLEARBIT( PORTB, PB5); // READ_DATA == 0
