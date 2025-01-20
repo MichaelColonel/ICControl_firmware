@@ -19,8 +19,8 @@ static FT_PROGRAM_DATA Data = {
 	0x6010,                     // PID
 	"FTDI",                     // Manufacturer
 	"FT",                       // Manufacturer ID
-	"Dual RS232-HS",				// Description
-	"IHEPCHAN25IC01",                 // Serial Number
+	"C26AIC02",				// Description
+	"CABIN26AIC02",                 // Serial Number
 	500,                        // MaxPower
 	1,                          // PnP
 	0,                          // SelfPowered

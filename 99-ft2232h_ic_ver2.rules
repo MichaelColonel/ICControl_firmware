@@ -1,5 +1,8 @@
-SUBSYSTEMS=="usb", DRIVERS=="ftdi_sio", ATTRS{interface}=="Dual RS232-HS", ATTRS{bInterfaceNumber}=="00", GROUP="users", MODE="0666", SYMLINK+="ft2232h_ic_a"
-SUBSYSTEMS=="usb", DRIVERS=="ftdi_sio", ATTRS{interface}=="Dual RS232-HS", ATTRS{bInterfaceNumber}=="01", GROUP="users", MODE="0666", SYMLINK+="ft2232h_ic_b"
+SUBSYSTEMS=="usb", DRIVERS=="ftdi_sio", ATTRS{interface}=="C26AIC01", ATTRS{bInterfaceNumber}=="00", GROUP="users", MODE="0666", SYMLINK+="ft2232h_ic01_a"
+SUBSYSTEMS=="usb", DRIVERS=="ftdi_sio", ATTRS{interface}=="C26AIC01", ATTRS{bInterfaceNumber}=="01", GROUP="users", MODE="0666", SYMLINK+="ft2232h_ic01_b"
+SUBSYSTEMS=="usb", DRIVERS=="ftdi_sio", ATTRS{interface}=="C26AIC02", ATTRS{bInterfaceNumber}=="00", GROUP="users", MODE="0666", SYMLINK+="ft2232h_ic02_a"
+SUBSYSTEMS=="usb", DRIVERS=="ftdi_sio", ATTRS{interface}=="C26AIC02", ATTRS{bInterfaceNumber}=="01", GROUP="users", MODE="0666", SYMLINK+="ft2232h_ic02_b"
+
 #SUBSYSTEM=="usb-serial", DRIVER=="ftdi_sio", ATTRS{idProduct}=="6010", ATTRS{idVendor}=="0403",  ATTR{latency_timer}="2"
 #ATTRS{idProduct}=="6010", ATTRS{idVendor}=="0403", RUN+="/sbin/setserial /dev/ttyUSB%n ^low_latency"
 #ATTRS{idProduct}=="6010", ATTRS{idVendor}=="0403", RUN+="/bin/stty -F /dev/ttyUSB%n -iexten -echo -isig raw"
