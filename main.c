@@ -22,7 +22,7 @@
 // avrdude -pm128 -cavr910 -P/dev/ttyACM_AVR910 -b4800 -u -Uhfuse:w:0xC9:m -Ulfuse:w:0xE4:m -Uefuse:w:0xFF:m
 
 // AVRDude for flash hex firmware
-// avrdude -pm128 -cavr910 -P/dev/ttyACM_AVR910 -b4800 -Uflash:w:Channel25_IonizationChamber_Ver2.hex:a
+// avrdude -pm128 -cavr910 -P/dev/ttyACM_AVR910 -b4800 -Uflash:w:Cabin26A_IC.hex:a
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -97,6 +97,7 @@ PGM_P const strings[] PROGMEM = {
 volatile char code = 'N';
 volatile uint8_t data = 0;
 volatile uint16_t chips_enabled = 0x0FFF;
+volatile uint16_t default_samples = 0;
 
 static uint8_t nofchips = CHIPS; // must always be 12
 static uint8_t integration_time = 1; // integration time code (0...15)
@@ -175,6 +176,10 @@ ISR(INT3_vect) // INT3 interrupt (FT2232H - Channel B interruption signal)
         code = buffer[0];
         chips_enabled = (buffer[2] << CHAR_BIT) | buffer[1];
     	break;
+      case 'P': // new amount of samPles
+        code = buffer[0];
+        default_samples = (buffer[2] << CHAR_BIT) | buffer[1];
+        break;
       default:
         break;
       }
@@ -241,6 +246,7 @@ int main(int argc, char** argv)
       // ALTERA RESET
       CLEARBIT( PORTB, PB4); // ALTERA reset - low
       SETBIT( PORTB, PB4); // ALTERA reset - high
+
       for (uint32_t j = 0; j < samples; ++j)
       {
         if (code != 'B')
@@ -253,6 +259,7 @@ int main(int argc, char** argv)
         SETBIT( PORTB, PB6); // READ_DATA_CLK - High
         CLEARBIT( PORTB, PB6); // READ_DATA_CLK - Low
       }
+
       CLEARBIT( PORTB, PB5); // READ_DATA - Low
       if (use_external_start && !single_shot_acquisition)
       {
@@ -358,7 +365,7 @@ ext_abort:
       {
         uint8_t pos = 0;
         uint8_t chips = get_chips_enabled();
-        if (data > COUNTS_MIN && data < UCHAR_MAX && chips)
+        if (data >= COUNTS_MIN && data <= UCHAR_MAX && chips)
         {
           samples = SAMPLES(chips, data);
         }
@@ -368,6 +375,23 @@ ext_abort:
         }
         ft2232h_b_write_char('M');
         ft2232h_b_write_char('A' + chips);
+        ft2232h_b_write_rom_string_number(pos); // "OK" if 0, "NO" if 1
+      }
+      update_code(cmd);
+      break;
+    case 'P': // new amount of samPles
+      {
+        uint8_t pos = 0;
+        uint8_t chips = get_chips_enabled();
+        if (default_samples && chips)
+        {
+          samples = SAMPLES(chips, default_samples);
+        }
+        else
+        {
+          pos = 1;
+        }
+        ft2232h_b_write_char('P');
         ft2232h_b_write_rom_string_number(pos); // "OK" if 0, "NO" if 1
       }
       update_code(cmd);

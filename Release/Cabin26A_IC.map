@@ -134,7 +134,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0xa82
+.text           0x0000000000000000      0xb26
  *(.vectors)
  .vectors       0x0000000000000000       0x8c /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
                 0x0000000000000000                __vectors
@@ -269,98 +269,98 @@ END GROUP
                 0x0000000000000252       0x28 ./main.o
                 0x0000000000000252                __vector_2
  .text.__vector_4
-                0x000000000000027a       0xd2 ./main.o
+                0x000000000000027a       0xea ./main.o
                 0x000000000000027a                __vector_4
  .text.startup.main
-                0x000000000000034c      0x69a ./main.o
-                0x000000000000034c                main
+                0x0000000000000364      0x726 ./main.o
+                0x0000000000000364                main
  .text.libgcc.mul
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
- .text.libgcc   0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .text.libgcc   0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
  .text.libgcc.div
-                0x00000000000009e6        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
- .text.libgcc   0x00000000000009e6       0x12 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
-                0x00000000000009e6                __tablejump2__
+                0x0000000000000a8a        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+ .text.libgcc   0x0000000000000a8a       0x12 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                0x0000000000000a8a                __tablejump2__
  .text.libgcc.prologue
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
  .text.libgcc.builtins
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
  .text.libgcc.fmul
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
  .text.libgcc.fixed
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_tablejump2.o)
  .text.libgcc.mul
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
- .text.libgcc   0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
  .text.libgcc.fixed
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_copy_data.o)
  .text.libgcc.mul
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
  .text.libgcc.div
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
- .text.libgcc   0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
  .text.libgcc.prologue
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
  .text.libgcc.builtins
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
  .text.libgcc.fmul
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
-                0x00000000000009f8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
+                0x0000000000000a9c        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_clear_bss.o)
  .text.libgcc.mul
-                0x00000000000009f8        0xe /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
-                0x00000000000009f8                __usmulhisi3
-                0x00000000000009fc                __usmulhisi3_tail
+                0x0000000000000a9c        0xe /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                0x0000000000000a9c                __usmulhisi3
+                0x0000000000000aa0                __usmulhisi3_tail
  .text.libgcc.div
-                0x0000000000000a06        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
- .text.libgcc   0x0000000000000a06        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                0x0000000000000aaa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+ .text.libgcc   0x0000000000000aaa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
  .text.libgcc.prologue
-                0x0000000000000a06        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                0x0000000000000aaa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
  .text.libgcc.builtins
-                0x0000000000000a06        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                0x0000000000000aaa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
  .text.libgcc.fmul
-                0x0000000000000a06        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                0x0000000000000aaa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
  .text.libgcc.fixed
-                0x0000000000000a06        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
+                0x0000000000000aaa        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_usmulhisi3.o)
  .text.libgcc.mul
-                0x0000000000000a06       0x1e /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
-                0x0000000000000a06                __umulhisi3
+                0x0000000000000aaa       0x1e /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x0000000000000aaa                __umulhisi3
  .text.libgcc.div
-                0x0000000000000a24        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
- .text.libgcc   0x0000000000000a24        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x0000000000000ac8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+ .text.libgcc   0x0000000000000ac8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
  .text.libgcc.prologue
-                0x0000000000000a24        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x0000000000000ac8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
  .text.libgcc.builtins
-                0x0000000000000a24        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x0000000000000ac8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
  .text.libgcc.fmul
-                0x0000000000000a24        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x0000000000000ac8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
  .text.libgcc.fixed
-                0x0000000000000a24        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
-                0x0000000000000a24                . = ALIGN (0x2)
+                0x0000000000000ac8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_umulhisi3.o)
+                0x0000000000000ac8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000000a24        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
-                0x0000000000000a24                exit
-                0x0000000000000a24                _exit
+ .fini9         0x0000000000000ac8        0x0 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+                0x0000000000000ac8                exit
+                0x0000000000000ac8                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -379,21 +379,21 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000000a24        0x4 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
+ .fini0         0x0000000000000ac8        0x4 /usr/lib64/gcc/avr/10.2.0/avr51/libgcc.a(_exit.o)
  *(.fini0)
  *(.hightext)
  *(.hightext*)
  *(.progmemx.*)
-                0x0000000000000a28                . = ALIGN (0x2)
+                0x0000000000000acc                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
  .jumptables.gcc.__vector_4
-                0x0000000000000a28       0x26 ./main.o
+                0x0000000000000acc       0x26 ./main.o
  .jumptables.gcc.main
-                0x0000000000000a4e       0x34 ./main.o
-                0x0000000000000a82                _etext = .
+                0x0000000000000af2       0x34 ./main.o
+                0x0000000000000b26                _etext = .
 
-.data           0x0000000000800100        0xa load address 0x0000000000000a82
+.data           0x0000000000800100        0xa load address 0x0000000000000b26
                 0x0000000000800100                PROVIDE (__data_start = .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
@@ -425,7 +425,7 @@ END GROUP
                 0x000000000080010a                _edata = .
                 0x000000000080010a                PROVIDE (__data_end = .)
 
-.bss            0x000000000080010a        0x9
+.bss            0x000000000080010a        0xb
                 0x000000000080010a                PROVIDE (__bss_start = .)
  *(.bss)
  .bss           0x000000000080010a        0x0 /usr/lib64/gcc/avr/10.2.0/../../../../avr/lib/avr51/crtatmega128.o
@@ -447,18 +447,21 @@ END GROUP
                 0x0000000000800110        0x1 ./main.o
  .bss.use_external_start
                 0x0000000000800111        0x1 ./main.o
- .bss.data      0x0000000000800112        0x1 ./main.o
-                0x0000000000800112                data
+ .bss.default_samples
+                0x0000000000800112        0x2 ./main.o
+                0x0000000000800112                default_samples
+ .bss.data      0x0000000000800114        0x1 ./main.o
+                0x0000000000800114                data
  *(COMMON)
-                0x0000000000800113                PROVIDE (__bss_end = .)
-                0x0000000000000a82                __data_load_start = LOADADDR (.data)
-                0x0000000000000a8c                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000000000800115                PROVIDE (__bss_end = .)
+                0x0000000000000b26                __data_load_start = LOADADDR (.data)
+                0x0000000000000b30                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0000000000800113        0x0
+.noinit         0x0000000000800115        0x0
                 [!provide]                        PROVIDE (__noinit_start = .)
  *(.noinit .noinit.* .gnu.linkonce.n.*)
                 [!provide]                        PROVIDE (__noinit_end = .)
-                0x0000000000800113                _end = .
+                0x0000000000800115                _end = .
                 [!provide]                        PROVIDE (__heap_start = .)
 
 .eeprom         0x0000000000810000        0x0
