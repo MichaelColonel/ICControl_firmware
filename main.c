@@ -64,19 +64,19 @@
 #define VALUE                   (F_CPU / (2UL * PRESCALER * CLOCK) - 1)
 #define CALC_VALUE( P, F)               (F_CPU / (2UL * (P) * (F)) - 1)
 
-#define DATA_SIZE 4
-
 #define CHIPS                                              12
 #define CHANNELS_PER_CHIP                                  32
 #define BYTES_PER_ADC_COUNT                                 4
-#define COUNTS                                             42
+#define SAMPLES                                            42
 #define INTEGRATION_TIME_CODE_MAX                          16
 #define CAPACITY_CODE_OFFSET                                5
 
-#define SAMPLES(C,IT)          ((C) * CHANNELS_PER_CHIP * BYTES_PER_ADC_COUNT * 2UL * (IT))
-#define DEFAULT_SAMPLES                        SAMPLES(CHIPS, COUNTS)
-#define COUNTS_MIN                                          10
-#define ACQ_LOOP_CYCLES                                    150
+#define STROBES(C,S)          ((C) * CHANNELS_PER_CHIP * BYTES_PER_ADC_COUNT * 2UL * (S))
+#define STROBES2(C,S)                                                         ((C) * (S))
+#define DEFAULT_STROBES                                          STROBES2(CHIPS, SAMPLES)
+
+#define SAMPLES_MIN                                        10
+#define ACQ_LOOP_CYCLES                                   150
 
 const char OK_string[] PROGMEM = "OK";
 const char NO_string[] PROGMEM = "NO";
@@ -95,17 +95,19 @@ PGM_P const strings[] PROGMEM = {
 };
 
 volatile char code = 'N';
-volatile uint8_t data = 0;
-volatile uint16_t chips_enabled = 0x0FFF;
-volatile uint16_t default_samples = 0;
+volatile uint8_t data = 0; // for 1 byte data
+volatile uint16_t data2 = 0; // for 2 bytes data
 
 static uint8_t nofchips = CHIPS; // must always be 12
 static uint8_t integration_time = 1; // integration time code (0...15)
 static uint8_t chip_capacity = 7;
-static uint32_t samples = DEFAULT_SAMPLES;
+static uint16_t samples_strobes = DEFAULT_STROBES; // number of strobes for requested number of samples divided by 256
+
 static bool use_external_start = false;
 static bool single_shot_acquisition = false;
 static bool adc_format = false; // ADC FORMAT (0 === 16bit, 1 === 20bit)
+static uint16_t chips_enabled = 0x0FFF;
+static uint16_t sideAB_samples = 100;
 
 void init(void) __attribute__((naked,section(".init3")));
 static void ft2232h_b_write_rom_string(PGM_P str);
@@ -167,18 +169,15 @@ ISR(INT3_vect) // INT3 interrupt (FT2232H - Channel B interruption signal)
       case 'O': // set number Of chips
       case 'C': // set Capacity for chip
       case 'I': // Integration time
-      case 'M': // aMount of samples
+      case 'M': // set uint8_t aMount of samples
       case 'D': // ADC moDe
         code = buffer[0];
         data = buffer[1];
         break;
       case 'E': // chips Enabled
+      case 'P': // set uint16_t amount of samPles
         code = buffer[0];
-        chips_enabled = (buffer[2] << CHAR_BIT) | buffer[1];
-    	break;
-      case 'P': // new amount of samPles
-        code = buffer[0];
-        default_samples = (buffer[2] << CHAR_BIT) | buffer[1];
+        data2 = (buffer[2] << CHAR_BIT) | buffer[1];
         break;
       default:
         break;
@@ -223,7 +222,7 @@ int main(int argc, char** argv)
 	  ft2232h_b_write_rom_string_number(0); // "OK"
 	  update_code(cmd);
 	  break;
-    case 'B':
+    case 'B': // data acquisition and transmission
       if (bit_is_set(EIMSK, INT1))
       {
         CLEARBIT( EIMSK, INT1); // Disable INT1
@@ -246,9 +245,54 @@ int main(int argc, char** argv)
       // ALTERA RESET
       CLEARBIT( PORTB, PB4); // ALTERA reset - low
       SETBIT( PORTB, PB4); // ALTERA reset - high
-
-      for (uint32_t j = 0; j < samples; ++j)
+/*
       {
+        uint8_t v1 = samples_strobes / 48;
+        for (uint8_t k = 0; k < v1; ++k)
+        {
+          for (uint8_t p = 0; p < 48; ++p)
+          {
+           	// 256 strobes
+            for (uint8_t j = 0; j < UCHAR_MAX; ++j)
+            {
+              if (code != 'B')
+              {
+                goto ext_abort;
+              }
+              // Channel A write strobe
+              ft2232h_a_write_strobe();
+              // READ_DATA_CLK strobe
+              SETBIT( PORTB, PB6); // READ_DATA_CLK - High
+              CLEARBIT( PORTB, PB6); // READ_DATA_CLK - Low
+            }
+            if (code != 'B')
+            {
+              goto ext_abort;
+            }
+            // Channel A write strobe
+            ft2232h_a_write_strobe();
+            // READ_DATA_CLK strobe
+            SETBIT( PORTB, PB6); // READ_DATA_CLK - High
+            CLEARBIT( PORTB, PB6); // READ_DATA_CLK - Low
+          }
+        }
+      }
+*/
+      for (uint16_t i = 0; i < samples_strobes; ++i)
+      {
+    	// 256 strobes
+        for (uint8_t j = 0; j < UCHAR_MAX; ++j)
+        {
+          if (code != 'B')
+          {
+            goto ext_abort;
+          }
+          // Channel A write strobe
+          ft2232h_a_write_strobe();
+          // READ_DATA_CLK strobe
+          SETBIT( PORTB, PB6); // READ_DATA_CLK - High
+          CLEARBIT( PORTB, PB6); // READ_DATA_CLK - Low
+        }
         if (code != 'B')
         {
           goto ext_abort;
@@ -287,14 +331,14 @@ ext_abort:
       }
       ft2232h_b_write_rom_string_number(4); // "Abort"
       break; // exit to main loop to execute a new command code
-    case 'C':
+    case 'C': // set capacity
       chip_capacity = data >> CAPACITY_CODE_OFFSET;
       ft2232h_b_write_char('C');
       ft2232h_b_write_char('0' + chip_capacity);
       ft2232h_b_write_rom_string_number(0); // "OK"
       update_code(cmd);
       break;
-    case 'D':
+    case 'D': // set ADC mode
       adc_format = (bool)data;
 //      SETVAL( PORTF, PF4, adc_format); // ADC FORMAT (0 === 16bit, 1 === 20bit)
       ft2232h_b_write_char('D');
@@ -305,8 +349,9 @@ ext_abort:
     case 'E': // chips Enabled
       {
         uint8_t pos = 0;
-        if (chips_enabled && chips_enabled <= 0x0FFF)
+        if (data2 && data2 <= 0x0FFF)
         {
+          chips_enabled = data2;
           setup_chips_enabled();
         }
         else
@@ -332,7 +377,7 @@ ext_abort:
       ft2232h_b_write_rom_string_number(0); // "OK"
       update_code(cmd);
       break;
-    case 'I':
+    case 'I': // set integration time
       {
         uint8_t pos = 0;
         if (data < INTEGRATION_TIME_CODE_MAX)
@@ -350,7 +395,7 @@ ext_abort:
       }
       update_code(cmd);
       break;
-    case 'L':
+    case 'L': // list of chips enabled
       ft2232h_b_write_char('L');
       for (uint8_t i = 0; i < CHIPS; ++i)
       {
@@ -361,13 +406,14 @@ ext_abort:
       ft2232h_b_write_rom_string_number(0); // "OK"
       update_code(cmd);
       break;
-    case 'M':
+    case 'M': // set amount of samples and strobes
       {
         uint8_t pos = 0;
         uint8_t chips = get_chips_enabled();
-        if (data >= COUNTS_MIN && data <= UCHAR_MAX && chips)
+        if (data >= SAMPLES_MIN && data <= UCHAR_MAX && chips)
         {
-          samples = SAMPLES(chips, data);
+          sideAB_samples = data;
+          samples_strobes = STROBES2(chips, data);
         }
         else
         {
@@ -379,13 +425,14 @@ ext_abort:
       }
       update_code(cmd);
       break;
-    case 'P': // new amount of samPles
+    case 'P': // set a new amount of strobes
       {
         uint8_t pos = 0;
         uint8_t chips = get_chips_enabled();
-        if (default_samples && chips)
+        if (data2 && chips)
         {
-          samples = SAMPLES(chips, default_samples);
+          sideAB_samples = data2;
+          samples_strobes = STROBES2(chips, data2);
         }
         else
         {
@@ -396,7 +443,7 @@ ext_abort:
       }
       update_code(cmd);
       break;
-    case 'O':
+    case 'O': // set number of chips (ALWAYS 12)
       {
         uint8_t pos = 0;
         if (data && data <= CHIPS)
