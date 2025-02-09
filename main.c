@@ -68,7 +68,7 @@
 #define CHANNELS_PER_CHIP                                  32
 #define BYTES_PER_ADC_COUNT                                 4
 #define SAMPLES                                            42
-#define INTEGRATION_TIME_CODE_MAX                          16
+#define INTEGRATION_TIME_CODE_MAX                          15
 #define CAPACITY_CODE_OFFSET                                5
 
 #define STROBES(C,S)          ((C) * CHANNELS_PER_CHIP * BYTES_PER_ADC_COUNT * 2UL * (S))
@@ -333,6 +333,9 @@ ext_abort:
       break; // exit to main loop to execute a new command code
     case 'C': // set capacity
       chip_capacity = data >> CAPACITY_CODE_OFFSET;
+      {
+//        uint8_t current_chip_index = data & 0x0F; // active chip [0...11]
+      }
       ft2232h_b_write_char('C');
       ft2232h_b_write_char('0' + chip_capacity);
       ft2232h_b_write_rom_string_number(0); // "OK"
@@ -380,7 +383,7 @@ ext_abort:
     case 'I': // set integration time
       {
         uint8_t pos = 0;
-        if (data < INTEGRATION_TIME_CODE_MAX)
+        if (data <= INTEGRATION_TIME_CODE_MAX)
         {
           integration_time = data;
           setup_integration_time();
@@ -410,7 +413,7 @@ ext_abort:
       {
         uint8_t pos = 0;
         uint8_t chips = get_chips_enabled();
-        if (data >= SAMPLES_MIN && data <= UCHAR_MAX && chips)
+        if (data >= SAMPLES_MIN && chips)
         {
           sideAB_samples = data;
           samples_strobes = STROBES2(chips, data);
@@ -429,7 +432,7 @@ ext_abort:
       {
         uint8_t pos = 0;
         uint8_t chips = get_chips_enabled();
-        if (data2 && chips)
+        if (data2 >= SAMPLES_MIN && chips)
         {
           sideAB_samples = data2;
           samples_strobes = STROBES2(chips, data2);
