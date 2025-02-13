@@ -107,7 +107,6 @@ static bool use_external_start = false;
 static bool single_shot_acquisition = false;
 static bool adc_format = false; // ADC FORMAT (0 === 16bit, 1 === 20bit)
 static uint16_t chips_enabled = 0x0FFF;
-static uint16_t sideAB_samples = 100;
 
 void init(void) __attribute__((naked,section(".init3")));
 static void ft2232h_b_write_rom_string(PGM_P str);
@@ -115,6 +114,7 @@ static void ft2232h_b_write_rom_string_number(uint8_t num);
 static void ft2232h_b_write_char(char c);
 static void ft2232h_a_write_strobe(void);
 
+static void stop_acquisition(uint8_t message_code);
 static void setup_chips_enabled(void);
 static void setup_integration_time(void);
 static void setup_ddc232_configuration_register(void);
@@ -303,7 +303,7 @@ int main(int argc, char** argv)
         SETBIT( PORTB, PB6); // READ_DATA_CLK - High
         CLEARBIT( PORTB, PB6); // READ_DATA_CLK - Low
       }
-
+/*
       CLEARBIT( PORTB, PB5); // READ_DATA - Low
       if (use_external_start && !single_shot_acquisition)
       {
@@ -315,10 +315,13 @@ int main(int argc, char** argv)
         single_shot_acquisition = false;
       }
       ft2232h_b_write_rom_string_number(3); // "Finish"
+*/
+      stop_acquisition(3);
       update_code(cmd);
       break;
 ext_abort:
       CLEARBIT( PORTB, PB3); // START acquisition == 0
+/*
       CLEARBIT( PORTB, PB5); // READ_DATA == 0
       if (use_external_start && !single_shot_acquisition)
       {
@@ -330,6 +333,8 @@ ext_abort:
         single_shot_acquisition = false;
       }
       ft2232h_b_write_rom_string_number(4); // "Abort"
+*/
+      stop_acquisition(4);
       break; // exit to main loop to execute a new command code
     case 'C': // set capacity
       chip_capacity = data >> CAPACITY_CODE_OFFSET;
@@ -351,16 +356,14 @@ ext_abort:
       break;
     case 'E': // chips Enabled
       {
-        uint8_t pos = 0;
+        uint8_t pos = 1;
         if (data2 && data2 <= 0x0FFF)
         {
           chips_enabled = data2;
           setup_chips_enabled();
+          pos = 0;
         }
-        else
-        {
-          pos = 1;
-        }
+
         ft2232h_b_write_char('E');
         ft2232h_b_write_rom_string_number(pos); // "OK" if 0, "NO" if 1
       }
@@ -382,16 +385,14 @@ ext_abort:
       break;
     case 'I': // set integration time
       {
-        uint8_t pos = 0;
+        uint8_t pos = 1;
         if (data <= INTEGRATION_TIME_CODE_MAX)
         {
           integration_time = data;
           setup_integration_time();
+          pos = 0;
         }
-        else
-        {
-          pos = 1;
-        }
+
         ft2232h_b_write_char('I');
         ft2232h_b_write_char('A' + integration_time);
         ft2232h_b_write_rom_string_number(pos); // "OK" if 0, "NO" if 1
@@ -411,16 +412,12 @@ ext_abort:
       break;
     case 'M': // set amount of samples and strobes
       {
-        uint8_t pos = 0;
+     	uint8_t pos = 1;
         uint8_t chips = get_chips_enabled();
         if (data >= SAMPLES_MIN && chips)
         {
-          sideAB_samples = data;
           samples_strobes = STROBES2(chips, data);
-        }
-        else
-        {
-          pos = 1;
+          pos = 0;
         }
         ft2232h_b_write_char('M');
         ft2232h_b_write_char('A' + chips);
@@ -430,16 +427,12 @@ ext_abort:
       break;
     case 'P': // set a new amount of strobes
       {
-        uint8_t pos = 0;
+    	uint8_t pos = 1;
         uint8_t chips = get_chips_enabled();
         if (data2 >= SAMPLES_MIN && chips)
         {
-          sideAB_samples = data2;
           samples_strobes = STROBES2(chips, data2);
-        }
-        else
-        {
-          pos = 1;
+          pos = 0;
         }
         ft2232h_b_write_char('P');
         ft2232h_b_write_rom_string_number(pos); // "OK" if 0, "NO" if 1
@@ -448,15 +441,13 @@ ext_abort:
       break;
     case 'O': // set number of chips (ALWAYS 12)
       {
-        uint8_t pos = 0;
+        uint8_t pos = 1;
         if (data && data <= CHIPS)
         {
           nofchips = data; // not used any more
+          pos = 0;
         }
-        else
-        {
-          pos = 1;
-        }
+
         ft2232h_b_write_char('O');
         ft2232h_b_write_char('A' + nofchips);
         ft2232h_b_write_rom_string_number(pos); // "OK" if 0, "NO" if 1
@@ -773,6 +764,21 @@ uint8_t get_chips_enabled(void)
     chips += (chips_enabled >> i) & 1;
   }
   return chips;
+}
+
+void stop_acquisition(uint8_t message_code)
+{
+  CLEARBIT( PORTB, PB5); // READ_DATA - Low
+  if (use_external_start && !single_shot_acquisition)
+  {
+	SETBIT( EIFR, INTF1); // Reset INT1
+    SETBIT( EIMSK, INT1); // Enable INT1
+  }
+  else if (single_shot_acquisition)
+  {
+    single_shot_acquisition = false;
+  }
+  ft2232h_b_write_rom_string_number(message_code);
 }
 
 void update_code(uint8_t cmd)
