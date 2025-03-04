@@ -130,7 +130,7 @@ ISR(TIMER3_COMPA_vect) // timer/counter-3 compare interrupt
 
 ISR(INT1_vect) // INT1 interrupt
 {
-  CLEARBIT( EIMSK, INT1); // Disable INT1
+//  CLEARBIT( EIMSK, INT1); // Disable INT1
   CLEARBIT( PORTB, PB4); // ALTERA reset - low
   SETBIT( PORTB, PB4); // ALTERA reset - high
   code = 'B';
@@ -151,7 +151,7 @@ ISR(INT3_vect) // INT3 interrupt (FT2232H - Channel B interruption signal)
   PORTA = 0x00; // Port A - Hi-Z
   if (pos == 3)
   {
-	TOGGLEBIT( PORTG, PG1); // LED2
+    TOGGLEBIT( PORTG, PG1); // LED2
     pos = 0;
     if (bufferIsReset)
     {
@@ -164,7 +164,7 @@ ISR(INT3_vect) // INT3 interrupt (FT2232H - Channel B interruption signal)
       case 'S': // Single shot acquisition
       case 'L': // get List of chips enabled
         code = buffer[0];
-    	break;
+        break;
       case 'A': // external stArt
       case 'O': // set number Of chips
       case 'C': // set Capacity for chip
@@ -201,34 +201,49 @@ int main(int argc, char** argv)
   while (1)
   {
     uint8_t cmd;
-	// Wait for interrupt and value other than 'N'
-	do
-	{
-	  ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-	  {
-	    cmd = code;
-	  }
-	} while (cmd == 'N');
+    // Wait for interrupt and value other than 'N'
+    do
+    {
+      ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+      {
+        cmd = code;
+      }
+    } while (cmd == 'N');
 
     switch (cmd)
-	{
-	case 'A': // external start
-	  use_external_start = (bool)data;
-	  single_shot_acquisition = false;
-	  SETBIT( EIFR, INTF1); // Reset INT1
-	  SETVAL( EIMSK, INT1, use_external_start); // enable INT1 if use_external start is true
-	  ft2232h_b_write_char('A');
-	  ft2232h_b_write_char('0' + use_external_start);
-	  ft2232h_b_write_rom_string_number(0); // "OK"
-	  update_code(cmd);
-	  break;
+    {
+    case 'A': // external start
+      if (data == 'A')
+      {
+        use_external_start = false;
+        single_shot_acquisition = false;
+        SETBIT( EIFR, INTF1); // Reset INT1
+        CLEARBIT( EIMSK, INT1); // disable INT1
+      }
+      else
+      {
+        use_external_start = (bool)data;
+        single_shot_acquisition = false;
+        SETBIT( EIFR, INTF1); // Reset INT1
+        SETVAL( EIMSK, INT1, use_external_start); // enable INT1 if use_external start is true
+      }
+      ft2232h_b_write_char('A');
+      ft2232h_b_write_char('0' + use_external_start);
+      ft2232h_b_write_rom_string_number(0); // "OK"
+      update_code(cmd);
+      break;
     case 'B': // data acquisition and transmission
-      if (bit_is_set(EIMSK, INT1))
+//      if (bit_is_set(EIMSK, INT1))
       {
         CLEARBIT( EIMSK, INT1); // Disable INT1
+        SETBIT( EIFR, INTF1); // Reset INT1
       }
       ft2232h_b_write_rom_string_number(2); // "Start"
       _delay_ms(10);
+      // ALTERA RESET
+      CLEARBIT( PORTB, PB4); // ALTERA reset - low
+      SETBIT( PORTB, PB4); // ALTERA reset - high
+
       CLEARBIT( PORTB, PB5); // READ_DATA == 0
       SETBIT( PORTB, PB3); // START acquisition == 1
       for (uint8_t i = 0; i < ACQ_LOOP_CYCLES; ++i)
@@ -239,8 +254,8 @@ int main(int argc, char** argv)
           goto ext_abort;
         }
       }
-      CLEARBIT( PORTB, PB3); // START acquisition == 0
-      _delay_ms(50);
+//      CLEARBIT( PORTB, PB3); // START acquisition == 0
+//      _delay_ms(50);
       SETBIT( PORTB, PB5); // READ_DATA == 1
       // ALTERA RESET
       CLEARBIT( PORTB, PB4); // ALTERA reset - low
@@ -280,7 +295,7 @@ int main(int argc, char** argv)
 */
       for (uint16_t i = 0; i < samples_strobes; ++i)
       {
-    	// 256 strobes
+        // 256 strobes
         for (uint8_t j = 0; j < UCHAR_MAX; ++j)
         {
           if (code != 'B')
@@ -307,7 +322,7 @@ int main(int argc, char** argv)
       CLEARBIT( PORTB, PB5); // READ_DATA - Low
       if (use_external_start && !single_shot_acquisition)
       {
-    	SETBIT( EIFR, INTF1); // Reset INT1
+        SETBIT( EIFR, INTF1); // Reset INT1
         SETBIT( EIMSK, INT1); // Enable INT1
       }
       else if (single_shot_acquisition)
@@ -325,7 +340,7 @@ ext_abort:
       CLEARBIT( PORTB, PB5); // READ_DATA == 0
       if (use_external_start && !single_shot_acquisition)
       {
-    	SETBIT( EIFR, INTF1); // Reset INT1
+        SETBIT( EIFR, INTF1); // Reset INT1
         SETBIT( EIMSK, INT1); // Enable INT1
       }
       else if (single_shot_acquisition)
@@ -412,7 +427,7 @@ ext_abort:
       break;
     case 'M': // set amount of samples and strobes
       {
-     	uint8_t pos = 1;
+        uint8_t pos = 1;
         uint8_t chips = get_chips_enabled();
         if (data >= SAMPLES_MIN && chips)
         {
@@ -427,7 +442,7 @@ ext_abort:
       break;
     case 'P': // set a new amount of strobes
       {
-    	uint8_t pos = 1;
+        uint8_t pos = 1;
         uint8_t chips = get_chips_enabled();
         if (data2 >= SAMPLES_MIN && chips)
         {
@@ -469,14 +484,14 @@ ext_abort:
       ft2232h_b_write_rom_string_number(0); // "OK"
       update_code(cmd);
       break;
-	case 'Z': // initial "Welcome" message
-	  ft2232h_b_write_rom_string_number(5); // "Welcome"
-	  update_code(cmd);
-	  break;
-	case 'N':
-	default:
-	  break;
-	}
+    case 'Z': // initial "Welcome" message
+      ft2232h_b_write_rom_string_number(5); // "Welcome"
+      update_code(cmd);
+      break;
+    case 'N':
+    default:
+      break;
+    }
   }
   return EXIT_SUCCESS;
 }
@@ -768,10 +783,11 @@ uint8_t get_chips_enabled(void)
 
 void stop_acquisition(uint8_t message_code)
 {
+  CLEARBIT( PORTB, PB3); // START acquisition == 0
   CLEARBIT( PORTB, PB5); // READ_DATA - Low
   if (use_external_start && !single_shot_acquisition)
   {
-	SETBIT( EIFR, INTF1); // Reset INT1
+    SETBIT( EIFR, INTF1); // Reset INT1
     SETBIT( EIMSK, INT1); // Enable INT1
   }
   else if (single_shot_acquisition)
